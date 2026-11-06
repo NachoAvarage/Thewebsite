@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>My Practice Site</title>
+<style>
+  :root { --bg:#f3f6f4; --ink:#1b2a24; --accent:#1f7a5c; --card:#ffffff; }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg:#14201b; --ink:#e4efe9; --accent:#4fc59a; --card:#1c2c25; }
+  }
+  * { box-sizing: border-box; }
+  body { margin:0; font-family: Georgia, "Times New Roman", serif; background:var(--bg); color:var(--ink); line-height:1.6; }
+  main { max-width: 34rem; margin: 0 auto; padding: 3rem 1.25rem; }
+  h1 { font-size: 2rem; margin: 0 0 .25rem; }
+  p.sub { margin: 0 0 2rem; opacity: .8; }
+  .box { background: var(--card); padding: 1.25rem; border-radius: 6px; border: 1px solid color-mix(in srgb, var(--ink) 15%, transparent); }
+  label { display:block; margin-bottom:.5rem; }
+  input { width:100%; padding:.6rem; font-size:1rem; border:1px solid color-mix(in srgb, var(--ink) 35%, transparent); border-radius:4px; background:transparent; color:inherit; }
+  button { margin-top:.75rem; padding:.6rem 1.1rem; font-size:1rem; background:var(--accent); color:#fff; border:0; border-radius:4px; cursor:pointer; }
+  button:focus-visible, input:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+  #greeting { margin-top: 1.25rem; font-size: 1.25rem; min-height: 2rem; }
+</style>
+</head>
+<body>
+<main>
+  <h1>My Practice Site</h1>
+  <p class="sub">A tiny page I built so I can learn to break things safely.</p>
+
+  <div class="box">
+    <label for="name">What's your name?</label>
+    <input id="name" type="text" placeholder="Type a name">
+    <button id="go">Say hello</button>
+    <div id="greeting"></div>
+  </div>
+</main>
+
+<script>
+  document.getElementById("go").addEventListener("click", function () {
+    var name = document.getElementById("name").value;
+    // This is the deliberate bug: whatever you type gets treated as HTML, not plain text.
+    document.getElementById("greeting").innerHTML = "Hello, " + name + "!";
+  });
+</script>
+</body>
+</html>
